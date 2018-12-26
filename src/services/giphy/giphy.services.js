@@ -15,7 +15,8 @@ const searchGIFS = async (search, limit = 25, offset = 0) => {
   };
 
   // Mock function for testing purposes
-  if (isTesting() || 1) {
+  // TODO: Change this to call instead of use mock
+  if (isTesting()) {
     return searchResult;
   }
 
@@ -34,9 +35,7 @@ const searchGIFS = async (search, limit = 25, offset = 0) => {
   }
 };
 
-const test = () => 1;
-
 export {
+  // eslint-disable-next-line import/prefer-default-export
   searchGIFS,
-  test,
 };
