@@ -4,22 +4,28 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "eslint-plugin-react-hooks": "^0.0.0",
     "node-sass": "^4.11.0",
+    "prop-types": "^15.6.2",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.2"
+    "react-scripts": "2.1.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.84.0",
+    "styled-components": "^4.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "cross-env NODE_ENV=production react-scripts build",
     "test": "cross-env NODE_ENV=testing react-scripts test",
+		"test:once": "cross-env NODE_ENV=testing cross-env CI=true react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
+		"lint": "eslint ."
   },
   "pre-commit": [
     "lint",
-    "test"
+    "test:once"
   ],
   "eslintConfig": {
     "extends": "react-app"

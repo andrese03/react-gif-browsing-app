@@ -3,9 +3,9 @@ const config = {};
 
 // defaults
 config.default = {
-  GIPHY_HOST: 'https://api.giphy.com',
-  GIPHY_API_KEY: 'LaTKjBCfg57PXCZ89vrOdPK6RiZwxd5d',
-  GIPHY_SEARCH: '/v1/gifs/search',
+  GIPHY_HOST: process.env.GIPHY_HOST || 'https://api.giphy.com',
+  GIPHY_API_KEY: process.env.GIPHY_API_KEY || 'LaTKjBCfg57PXCZ89vrOdPK6RiZwxd5d',
+  GIPHY_SEARCH: process.env.GIPHY_SEARCH || '/v1/gifs/search',
 };
 
 // development
