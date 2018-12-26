@@ -5,6 +5,11 @@ This is a prototype app. It implements the popular GIPHY API to allow users to s
 - NodeJs v10.14.2 or higher.
 - Google Chrome/Chromium as the web browser.
 
+## Before you go...
+> This project is usign `react` and `react-dom` on an alpha version `16.7.0-alpha.2` in order to support `react-hooks`.
+> You probably are wondering why this project has a feature that is not official yet. Well, for demo purposes
+> i preferred to use hooks because it allows the code to be easily readable for the users. And... I love hooks. ♥
+
 ## Installation
 Just run `npm i` or `yarn` if you prefer yarn to run the development model of the app. 
 
