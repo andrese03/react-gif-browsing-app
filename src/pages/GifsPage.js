@@ -12,7 +12,7 @@ import './GifsPage.styles.scss';
 import { searchGIFS } from '../services/giphy/giphy.services';
 import GiphyItem from '../components/GiphyItem/GiphyItem';
 import GiphySearchInput from '../components/GiphySearchInput/GiphySearchInput';
-import SegmentArea from './SegmentArea';
+import SegmentArea from '../components/SegmentArea/SegmentArea';
 import Lightbox from '../components/Lightbox/Lightbox';
 
 const GifsPage = () => {
@@ -86,7 +86,7 @@ const GifsPage = () => {
   // Update Pagination Results when the gif lists is altered
   useEffect(() => {
     setPaginatedText(`Showing ${gifs.length} of ${totalGifs}`);
-  }, [gifs]);
+  }, [gifs, totalGifs]);
 
   return (
     <Container className="gifpages-container">

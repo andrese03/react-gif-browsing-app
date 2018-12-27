@@ -30,9 +30,10 @@ const ModalBasicExample = (props) => {
         <Container textAlign="center">
           <img src={item.url} alt={item.alt} title={item.title} />
           <div className="lightbox-controls">
-            <Button.Group>
+            <Button.Group className="lightbot-button-group">
               {/* Previous */}
               <Button
+                id="lightbox-previous-button"
                 icon="angle left"
                 secondary
                 onClick={onPreviousItem}
@@ -40,6 +41,7 @@ const ModalBasicExample = (props) => {
               <Button.Or />
               {/* Next */}
               <Button
+                id="lightbox-next-button"
                 icon="angle right"
                 secondary
                 onClick={onNextItem}
