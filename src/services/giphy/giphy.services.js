@@ -15,7 +15,6 @@ const searchGIFS = async (search, limit = 25, offset = 0) => {
   };
 
   // Mock function for testing purposes
-  // TODO: Change this to call instead of use mock
   if (isTesting()) {
     return searchResult;
   }

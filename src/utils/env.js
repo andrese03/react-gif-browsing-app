@@ -13,7 +13,7 @@ config.development = {
 };
 
 // sandbox
-config.testing = {
+config.test = {
 };
 
 // production
@@ -22,7 +22,7 @@ config.production = {
 
 const isDevelopment = () => ENVIRONMENT === 'development';
 
-const isTesting = () => ENVIRONMENT === 'testing';
+const isTesting = () => ENVIRONMENT === 'test';
 
 const isProduction = () => ENVIRONMENT === 'production';
 

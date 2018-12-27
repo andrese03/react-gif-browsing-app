@@ -10,7 +10,7 @@ const SegmentArea = ({ message }) => (
   <Segment placeholder>
     <Header icon>
       <Icon name="paw" />
-      {message}
+      <span id="segment-area-message">{message}</span>
     </Header>
   </Segment>
 );
