@@ -37,7 +37,7 @@ const GiphySearchInput = (props) => {
 
   return (
     <Form.Field onSubmit={handleSubmit} className={className}>
-      <Input fluid loading={loading} icon="paw" placeholder="Search..." onChange={handleChange} />
+      <Input id="giphy-search-input" fluid loading={loading} icon="paw" placeholder="Search..." onChange={handleChange} />
     </Form.Field>
   );
 };
