@@ -13,10 +13,14 @@ import { searchGIFS } from '../services/giphy/giphy.services';
 import GiphyItem from '../components/GiphyItem/GiphyItem';
 import GiphySearchInput from '../components/GiphySearchInput/GiphySearchInput';
 import SegmentArea from './SegmentArea';
+import Lightbox from '../components/Lightbox/Lightbox';
 
 const GifsPage = () => {
   // States
   const itemsPerPage = 24;
+  const [lighboxItemIndex, setLightboxItemIndex] = useState(-1);
+  const [lightboxItem, setLightboxItem] = useState(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [text, setText] = useState('');
   const [paginatedText, setPaginatedText] = useState('');
@@ -24,7 +28,7 @@ const GifsPage = () => {
   const [gifs, setGifs] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Common Functions
+  // Fetch GIFs from scratch
   const fetchGIFs = async () => {
     setLoading(true);
     const result = await searchGIFS(text, itemsPerPage, 0);
@@ -34,6 +38,7 @@ const GifsPage = () => {
     setLoading(false);
   };
 
+  // Append GIFs to the search
   const appendGIFs = async () => {
     setLoading(true);
     const offset = currentPage * itemsPerPage;
@@ -44,23 +49,58 @@ const GifsPage = () => {
     setLoading(false);
   };
 
-  const handleSearch = async (value) => {
+  const handleSearch = (value) => {
     setText(value);
   };
 
-  // Do the search
+  const lighboxAdapter = gif => ({
+    id: gif.id,
+    title: gif.slug,
+    alt: gif.slug,
+    url: gif.images.original.url,
+  });
+
+  const handleLightbox = (isOpen, giphyObject, index) => {
+    const item = lighboxAdapter(giphyObject);
+    setIsLightboxOpen(isOpen);
+    setLightboxItem(item);
+    setLightboxItemIndex(index);
+  };
+
+  const handleLightboxMove = (direction) => {
+    const index = lighboxItemIndex + direction;
+    if (index < 0 || index >= gifs.length) {
+      return;
+    }
+    const giphyObject = gifs[index];
+    const item = lighboxAdapter(giphyObject);
+    setLightboxItem(item);
+    setLightboxItemIndex(index);
+  };
+
+  // Do the Search when text Changes
   useEffect(() => {
     fetchGIFs();
   }, [text]);
 
-  // Update paginatedText
+  // Update Pagination Results when the gif lists is altered
   useEffect(() => {
     setPaginatedText(`Showing ${gifs.length} of ${totalGifs}`);
-  }, [gifs, totalGifs]);
+  }, [gifs]);
 
   return (
     <Container className="gifpages-container">
 
+      {/* Our Precious Lightbox */}
+      <Lightbox
+        open={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        item={lightboxItem}
+        onNextItem={() => handleLightboxMove(1)}
+        onPreviousItem={() => handleLightboxMove(-1)}
+      />
+
+      {/* Beautiful and Simple Header Area */}
       <Header textAlign="center" as="h1">
         {'GIF Browsing App'}
         <Header.Subheader>
@@ -68,10 +108,16 @@ const GifsPage = () => {
         </Header.Subheader>
       </Header>
 
+      {/* Search Area */}
       <Container className="gifpages-search-container">
-        <GiphySearchInput onChange={handleSearch} loading={loading} debounce={250} />
+        <GiphySearchInput
+          onChange={handleSearch}
+          loading={loading}
+          debounce={250}
+        />
       </Container>
 
+      {/* Oh la la, such divider! */}
       <Divider />
 
       {/* No GIFs */}
@@ -82,14 +128,22 @@ const GifsPage = () => {
       {/* GIFs */}
       {!!gifs.length && (
         <>
+          {/* Grid System to Display Each Gif */}
           <Grid columns={3}>
-            {gifs.map(g => (
-              <Grid.Column key={g.id}>
-                <GiphyItem item={g} />
+            {gifs.map((gif, index) => (
+              <Grid.Column key={gif.id}>
+                <GiphyItem
+                  item={gif}
+                  onClick={() => handleLightbox(true, gif, index)}
+                />
               </Grid.Column>
             ))}
           </Grid>
+
+          {/* Majestic divider */}
           <Divider />
+
+          {/* Actions */}
           <Container className="gifpages-button-container" textAlign="center">
             <Button
               loading={loading}

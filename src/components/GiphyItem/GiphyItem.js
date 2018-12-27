@@ -7,12 +7,12 @@ const Image = styled.img`
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => `${width}px`};
   max-width: 100%;
-  user-drag: none;
-  /* cursor: pointer; */
+  -webkit-user-drag: none;
+  cursor: pointer;
 `;
 
 // eslint-disable-next-line no-unused-vars
-const GiphyItem = ({ item }) => {
+const GiphyItem = ({ item, onClick }) => {
   // Getting parammeters from the item
   const {
     id,
@@ -31,7 +31,6 @@ const GiphyItem = ({ item }) => {
 
   return (
     <Container textAlign="center">
-      {/* compact */}
       <Image
         id={imageId}
         className="giphy-item-image"
@@ -40,6 +39,7 @@ const GiphyItem = ({ item }) => {
         title={title}
         height={200}
         width={width * (200 / height)}
+        onClick={onClick}
       />
     </Container>
   );
@@ -50,6 +50,7 @@ GiphyItem.propTypes = {
     title: PropTypes.string,
     preview_gif: PropTypes.any,
   }),
+  onClick: PropTypes.func.isRequired,
 };
 
 GiphyItem.defaultProps = {
