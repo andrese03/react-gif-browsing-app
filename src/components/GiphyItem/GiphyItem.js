@@ -51,7 +51,6 @@ GiphyItem.propTypes = {
     title: PropTypes.string,
     images: PropTypes.shape({
       preview_gif: PropTypes.shape({
-
       }),
     }),
   }),
