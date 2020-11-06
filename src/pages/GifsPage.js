@@ -53,7 +53,7 @@ const GifsPage = () => {
     setText(value);
   };
 
-  const lighboxAdapter = gif => ({
+  const lighboxAdapter = (gif) => ({
     id: gif.id,
     title: gif.slug,
     alt: gif.slug,
@@ -102,9 +102,11 @@ const GifsPage = () => {
 
       {/* Beautiful and Simple Header Area */}
       <Header textAlign="center" as="h1">
-        {'GIF Browsing App'}
+        GIF Browsing App
         <Header.Subheader>
-          {'Come with us and take a look at our beautiful set of Gifs. 💅'}
+          Come with us and take a look at our beautiful set of Gifs.
+          {' '}
+          <span role="img" aria-label="Nails">💅</span>
         </Header.Subheader>
       </Header>
 

@@ -13,7 +13,7 @@ const Image = styled.img`
 
 // eslint-disable-next-line no-unused-vars
 const GiphyItem = ({ item, onClick }) => {
-  // Getting parammeters from the item
+  // Getting parameters from the item
   const {
     id,
     title,
@@ -47,8 +47,13 @@ const GiphyItem = ({ item, onClick }) => {
 
 GiphyItem.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
-    preview_gif: PropTypes.any,
+    images: PropTypes.shape({
+      preview_gif: PropTypes.shape({
+
+      }),
+    }),
   }),
   onClick: PropTypes.func.isRequired,
 };
